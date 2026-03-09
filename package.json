@@ -4,12 +4,15 @@
   "description": "Algorand developer toolkit — wallets, funding, batch transactions, ASA management, contract interactions, and transaction inspection. Built for testnet developers.",
   "type": "module",
   "bin": {
-    "algotool": "./bin/cli.js"
+    "algotool": "./bin/cli.js",
+    "algotool-mcp": "./bin/mcp-server.js"
   },
   "scripts": {
-    "start": "node bin/cli.js"
+    "start": "node bin/cli.js",
+    "mcp": "node bin/mcp-server.js"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
     "algosdk": "^3.2.0"
   },
   "keywords": [
