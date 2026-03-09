@@ -157,14 +157,15 @@ async function main() {
       return
     }
 
-    console.log(`\nFaucet: https://lora.algokit.io/testnet/fund\n`)
-    console.log(`  Your wallets:\n`)
+    console.log(`\n  1. Go to the faucet:`)
+    console.log(`     https://lora.algokit.io/testnet/fund\n`)
+    console.log(`  2. Paste a wallet address and click Dispense:\n`)
     for (let i = 0; i < wallets.length; i++) {
-      console.log(`  [${i}] ${wallets[i].address}`)
+      console.log(`     [${i}] ${wallets[i].address}`)
     }
     if (wallets.length > 1) {
-      console.log(`\n  Tip: Fund just one wallet, then distribute to the rest:`)
-      console.log(`  $ algotool fund 0 2    # sends 2 ALGO from wallet 0 to all others`)
+      console.log(`\n  3. Then distribute to the rest (optional):`)
+      console.log(`     $ algotool fund 0 2`)
     }
     console.log()
     return
