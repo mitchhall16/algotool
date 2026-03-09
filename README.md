@@ -15,19 +15,19 @@ Works as a **CLI** and as a **Claude Code MCP server**, so Claude can manage Alg
 - View all balances at a glance
 
 ### Funding
-- Get direct faucet links for each wallet (testnet)
-- Distribute ALGO from one wallet to all others with a single command
-- Send ALGO to any address
-- Batch send from all wallets to one address (useful for load testing)
+- Get faucet instructions and wallet addresses for manual funding (testnet)
+- Distribute ALGO from one wallet to all others with a single command *(pending test)*
+- Send ALGO to any address *(pending test)*
+- Batch send from all wallets to one address *(pending test)*
 
 ### Token Operations (ASA)
-- Create your own Algorand Standard Asset with custom name, unit, supply, and decimals
-- Opt wallets into any ASA
-- Transfer tokens between wallets or to external addresses
+- Create your own Algorand Standard Asset with custom name, unit, supply, and decimals *(pending test)*
+- Opt wallets into any ASA *(pending test)*
+- Transfer tokens between wallets or to external addresses *(pending test)*
 - View token details and holdings
 
 ### Smart Contract Interaction
-- Call any smart contract method with ABI encoding
+- Call any smart contract method with ABI encoding *(pending test)*
 - Read global state from any app
 - Look up application escrow addresses
 - Pass custom arguments, foreign apps, assets, and accounts
