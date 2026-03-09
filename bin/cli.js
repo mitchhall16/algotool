@@ -157,15 +157,15 @@ async function main() {
       return
     }
 
-    const url = 'https://lora.algokit.io/testnet/fund'
-    console.log(`\nOpening Lora faucet... Copy an address below to fund it:\n`)
+    console.log(`\nFund your wallets at: https://lora.algokit.io/testnet/fund\n`)
+    console.log(`  1. Go to the URL above`)
+    console.log(`  2. Paste a wallet address`)
+    console.log(`  3. Click Dispense (~10 ALGO each)\n`)
+    console.log(`  Your wallets:\n`)
     for (let i = 0; i < wallets.length; i++) {
       console.log(`  [${i}] ${wallets[i].address}`)
     }
-    console.log(`\n  ${url}\n`)
-
-    const { exec } = await import('child_process')
-    exec(`open "${url}"`)
+    console.log()
     return
   }
 
