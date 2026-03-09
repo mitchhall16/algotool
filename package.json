@@ -1,0 +1,26 @@
+{
+  "name": "algotool",
+  "version": "0.1.0",
+  "description": "Algorand developer toolkit — wallets, funding, batch transactions, ASA management, contract interactions, and transaction inspection. Built for testnet developers.",
+  "type": "module",
+  "bin": {
+    "algotool": "./bin/cli.js"
+  },
+  "scripts": {
+    "start": "node bin/cli.js"
+  },
+  "dependencies": {
+    "algosdk": "^3.2.0"
+  },
+  "keywords": [
+    "algorand",
+    "testnet",
+    "devtools",
+    "wallets",
+    "blockchain",
+    "asa",
+    "smart-contracts",
+    "cli"
+  ],
+  "license": "MIT"
+}
