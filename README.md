@@ -4,6 +4,8 @@ Algorand developer toolkit — wallets, funding, batch transactions, ASA managem
 
 Works as a **CLI** and as a **Claude Code MCP server**, so Claude can manage Algorand wallets and transactions directly in your terminal.
 
+**You're in control.** algotool never does anything automatically — you decide how many wallets to create, which ones to fund, where to send, what to inspect. Every action is explicit.
+
 ## Install
 
 ```bash
@@ -21,23 +23,23 @@ npm link
 ## Quick Start
 
 ```bash
-# Create 5 wallets
-algotool wallets create 5
+# 1. Create however many wallets you need
+algotool wallets create 3
 
-# Open the Lora faucet to fund wallets manually
+# 2. Get faucet links for your wallets (fund whichever ones you want)
 algotool faucet
 
-# Check balances
+# 3. Check balances
 algotool status
 
-# Send ALGO from wallet 0 to an address
-algotool send 0 RECEIVERADDRESS... 1.5
+# 4. Distribute funds from one wallet to the others (optional)
+algotool fund 0 2
 
-# Create a token
-algotool asa create 0 "My Token" TKN 1000000
-
-# Inspect any transaction
-algotool tx TXID...
+# 5. Do whatever you want from here
+algotool send 0 SOMEADDRESS... 1.5       # send ALGO
+algotool asa create 0 "My Token" TKN 1M  # create a token
+algotool tx TXID...                       # inspect a transaction
+algotool app state 12345                  # read a contract
 ```
 
 ## Architecture
@@ -88,7 +90,7 @@ graph TD
 
 | Command | Description |
 |---|---|
-| `faucet` | Opens Lora faucet in browser + shows addresses to copy |
+| `faucet` | Shows clickable Lora faucet links for each wallet |
 | `fund <from> <amount>` | Send ALGO from wallet to all others |
 | `send <from> <to-address> <amount>` | Send ALGO to any address |
 | `batch <address> <amount>` | All wallets send to one address |
@@ -128,7 +130,7 @@ graph TD
 
 ## MCP Server (Claude Code Integration)
 
-The MCP server exposes all algotool functionality as tools that Claude Code can call directly.
+The MCP server lets Claude Code use algotool as a set of tools. Claude will always ask you before taking any action — how many wallets, which one to send from, how much, etc.
 
 ### Setup
 
@@ -145,13 +147,21 @@ sequenceDiagram
     participant M as algotool MCP
     participant A as Algorand
 
-    U->>C: "Create 3 wallets and fund them"
+    U->>C: "I want to set up some wallets"
+    C-->>U: "How many wallets do you want?"
+    U->>C: "3"
     C->>M: wallets_create(count: 3)
-    M->>A: Generate accounts
     M-->>C: 3 wallet addresses
+    C-->>U: "Created 3 wallets. Want to fund them?"
+    U->>C: "Yeah fund wallet 0"
     C->>M: faucet()
-    M-->>C: Wallet addresses + Lora faucet URL
-    C-->>U: "Fund your wallets at lora.algokit.io/testnet/fund"
+    M-->>C: Lora faucet links
+    C-->>U: "Here's the faucet link for wallet 0"
+    U->>C: "OK it's funded, send 2 ALGO to the others"
+    C->>M: fund_wallets(from: 0, amount: 2)
+    M->>A: Payment txns
+    M-->>C: Done
+    C-->>U: "Sent 2 ALGO to wallets 1 and 2"
 ```
 
 ### Available MCP Tools (22)
