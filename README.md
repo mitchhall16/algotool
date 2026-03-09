@@ -6,6 +6,47 @@ Works as a **CLI** and as a **Claude Code MCP server**, so Claude can manage Alg
 
 **You're in control.** algotool never does anything automatically — you decide how many wallets to create, which ones to fund, where to send, what to inspect. Every action is explicit.
 
+## Features
+
+### Wallet Management
+- Create any number of wallets instantly
+- Import existing wallets from a 25-word mnemonic
+- Export mnemonics for backup
+- View all balances at a glance
+
+### Funding
+- Get direct faucet links for each wallet (testnet)
+- Distribute ALGO from one wallet to all others with a single command
+- Send ALGO to any address
+- Batch send from all wallets to one address (useful for load testing)
+
+### Token Operations (ASA)
+- Create your own Algorand Standard Asset with custom name, unit, supply, and decimals
+- Opt wallets into any ASA
+- Transfer tokens between wallets or to external addresses
+- View token details and holdings
+
+### Smart Contract Interaction
+- Call any smart contract method with ABI encoding
+- Read global state from any app
+- Look up application escrow addresses
+- Pass custom arguments, foreign apps, assets, and accounts
+
+### Transaction Inspector
+- Inspect any transaction by ID — see sender, receiver, amount, fees, type, notes
+- Inspect full atomic groups — see every transaction in a grouped submission
+- View recent transaction history for any address or wallet
+
+### Network Config
+- Switch between testnet and mainnet
+- Uses free public Algorand API endpoints (no keys needed)
+
+### Claude Code Integration (MCP)
+- 22 tools available as an MCP server
+- Claude asks you what to do at every step — never acts on its own
+- Create wallets, send transactions, inspect state, all through conversation
+- Works alongside your existing Algorand project in Claude Code
+
 ## Install
 
 ```bash
