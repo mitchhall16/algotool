@@ -161,6 +161,10 @@ async function main() {
     for (let i = 0; i < wallets.length; i++) {
       console.log(`  [${i}] https://lora.algokit.io/testnet/fund/${wallets[i].address}`)
     }
+    if (wallets.length > 1) {
+      console.log(`\n  Tip: Fund just one wallet, then distribute to the rest:`)
+      console.log(`  $ algotool fund 0 2    # sends 2 ALGO from wallet 0 to all others`)
+    }
     console.log()
     return
   }
