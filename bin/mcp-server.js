@@ -6,7 +6,7 @@ import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprot
 import algosdk from 'algosdk'
 import { createWallets, listWallets, getWalletByIndex, getAccountFromWallet } from '../lib/wallets.js'
 import { loadWallets, clearWallets, addWallets, loadConfig, saveConfig } from '../lib/store.js'
-import { getClient, getBalance, fundFromFaucet, getNetwork, getAccountInfo, getIndexer } from '../lib/algod.js'
+import { getClient, getBalance, getNetwork, getAccountInfo, getIndexer } from '../lib/algod.js'
 import { sendAlgo, disperseFunds, batchSend } from '../lib/transactions.js'
 import { createASA, optInASA, transferASA, getASAInfo, getAccountAssets } from '../lib/asa.js'
 import { inspectTransaction, inspectGroup, formatTransaction, getAccountHistory } from '../lib/inspect.js'
@@ -61,12 +61,10 @@ const TOOLS = [
   // Funding
   {
     name: 'faucet',
-    description: 'Fund wallet(s) from the Algorand testnet faucet. Each wallet gets ~10 ALGO. Only works on testnet.',
+    description: 'Returns wallet addresses and the Lora faucet URL for manual funding. No programmatic faucet is available.',
     inputSchema: {
       type: 'object',
-      properties: {
-        wallet_index: { type: 'number', description: 'Wallet index to fund (omit to fund all wallets)' },
-      },
+      properties: {},
     },
   },
   {
@@ -353,23 +351,12 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       case 'faucet': {
         const wallets = loadWallets()
         if (wallets.length === 0) return err('No wallets. Create some first.')
-
-        let targets = wallets
-        if (a?.wallet_index !== undefined) {
-          if (a.wallet_index < 0 || a.wallet_index >= wallets.length) return err(`Wallet ${a.wallet_index} not found`)
-          targets = [wallets[a.wallet_index]]
-        }
-
-        const results = []
-        for (const w of targets) {
-          try {
-            await fundFromFaucet(w.address)
-            results.push({ address: w.address, status: 'funded' })
-          } catch (e) {
-            results.push({ address: w.address, status: 'error', error: e.message })
-          }
-        }
-        return ok({ message: `Funded ${results.filter(r => r.status === 'funded').length}/${targets.length} wallets`, results })
+        return ok({
+          message: 'No programmatic faucet available. Fund wallets manually using the Lora faucet.',
+          url: 'https://lora.algokit.io/testnet/fund',
+          instructions: 'Go to the URL above, paste a wallet address, and click Dispense. Each request gives ~10 ALGO.',
+          wallets: wallets.map((w, i) => ({ index: i, address: w.address })),
+        })
       }
 
       case 'send_algo': {

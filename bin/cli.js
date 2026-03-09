@@ -3,7 +3,7 @@
 import { createWallets, listWallets, getWalletByIndex } from '../lib/wallets.js'
 import { disperseFunds, batchSend, sendAlgo } from '../lib/transactions.js'
 import { loadWallets, clearWallets, loadConfig, saveConfig } from '../lib/store.js'
-import { getBalance, fundFromFaucet, getNetwork, getAccountInfo } from '../lib/algod.js'
+import { getBalance, getNetwork, getAccountInfo } from '../lib/algod.js'
 import { createASA, optInASA, transferASA, getASAInfo, getAccountAssets } from '../lib/asa.js'
 import { inspectTransaction, inspectGroup, formatTransaction, getAccountHistory } from '../lib/inspect.js'
 import { callApp, getAppState, getAppAddress } from '../lib/app.js'
@@ -25,7 +25,7 @@ function usage() {
     wallets import <mnemonic>       Import wallet from 25-word mnemonic
 
   Funding
-    faucet [index]                  Fund wallet from testnet faucet (default: all)
+    faucet                          Opens Lora testnet faucet in browser
     fund <from> <amount>            Send <amount> ALGO from wallet <from> to all others
     send <from> <to> <amount>       Send ALGO (wallet index -> address)
     batch <address> <amount>        All wallets send <amount> to <address>
@@ -56,7 +56,7 @@ function usage() {
 
   Examples:
     algotool wallets create 5
-    algotool faucet                   # fund all wallets from faucet
+    algotool faucet                   # open faucet in browser
     algotool fund 0 2                 # wallet 0 sends 2 ALGO to each
     algotool send 0 ADDR... 1.5       # wallet 0 sends 1.5 ALGO
     algotool asa create 0 "My Token" TKN 1000000
@@ -157,28 +157,15 @@ async function main() {
       return
     }
 
-    let targets = wallets
-    if (sub !== undefined && sub !== 'all') {
-      const idx = parseInt(sub)
-      if (isNaN(idx) || idx < 0 || idx >= wallets.length) {
-        console.log(`Wallet ${sub} not found.`)
-        return
-      }
-      targets = [wallets[idx]]
+    const url = 'https://lora.algokit.io/testnet/fund'
+    console.log(`\nOpening Lora faucet... Copy an address below to fund it:\n`)
+    for (let i = 0; i < wallets.length; i++) {
+      console.log(`  [${i}] ${wallets[i].address}`)
     }
+    console.log(`\n  ${url}\n`)
 
-    console.log(`\nFunding ${targets.length} wallet(s) from testnet faucet...\n`)
-    for (let i = 0; i < targets.length; i++) {
-      const w = targets[i]
-      process.stdout.write(`  ${w.address.slice(0, 8)}...${w.address.slice(-4)} `)
-      try {
-        await fundFromFaucet(w.address)
-        console.log('-> funded')
-      } catch (e) {
-        console.log(`-> ${e.message}`)
-      }
-    }
-    console.log('\nDone.')
+    const { exec } = await import('child_process')
+    exec(`open "${url}"`)
     return
   }
 

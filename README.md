@@ -24,7 +24,7 @@ npm link
 # Create 5 wallets
 algotool wallets create 5
 
-# Fund them from the testnet faucet
+# Open the Lora faucet to fund wallets manually
 algotool faucet
 
 # Check balances
@@ -88,7 +88,7 @@ graph TD
 
 | Command | Description |
 |---|---|
-| `faucet [index]` | Fund wallet(s) from testnet faucet (~10 ALGO each) |
+| `faucet` | Opens Lora faucet in browser + shows addresses to copy |
 | `fund <from> <amount>` | Send ALGO from wallet to all others |
 | `send <from> <to-address> <amount>` | Send ALGO to any address |
 | `batch <address> <amount>` | All wallets send to one address |
@@ -150,9 +150,8 @@ sequenceDiagram
     M->>A: Generate accounts
     M-->>C: 3 wallet addresses
     C->>M: faucet()
-    M->>A: POST /fund (×3)
-    M-->>C: All funded
-    C-->>U: "Created and funded 3 wallets"
+    M-->>C: Wallet addresses + Lora faucet URL
+    C-->>U: "Fund your wallets at lora.algokit.io/testnet/fund"
 ```
 
 ### Available MCP Tools (22)
@@ -185,7 +184,7 @@ Uses [Nodely](https://nodely.io) (formerly Algonode) free-tier public endpoints:
 
 - **Algod:** `testnet-api.algonode.cloud` / `mainnet-api.algonode.cloud`
 - **Indexer:** `testnet-idx.algonode.cloud` / `mainnet-idx.algonode.cloud`
-- **Faucet:** `dispenser-api.testnet.aws.algodev.network`
+- **Faucet:** No programmatic faucet — use [Lora](https://lora.algokit.io/testnet/fund) manually
 - **Limits:** ~6M requests/month, 60 req/s per IP
 
 ## Requirements
