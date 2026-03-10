@@ -16,19 +16,12 @@ Works as a **CLI** and as a **Claude Code MCP server**, so Claude can manage Alg
 
 ### Funding
 - Get faucet instructions and wallet addresses for manual funding (testnet)
-- Distribute ALGO from one wallet to all others with a single command ![pending](https://img.shields.io/badge/pending_test-yellow)
-- Send ALGO to any address ![pending](https://img.shields.io/badge/pending_test-yellow)
-- Batch send from all wallets to one address ![pending](https://img.shields.io/badge/pending_test-yellow)
-
+- Distribute ALGO from one wallet to all others with a single command- Send ALGO to any address- Batch send from all wallets to one address
 ### Token Operations (ASA)
-- Create your own Algorand Standard Asset with custom name, unit, supply, and decimals ![pending](https://img.shields.io/badge/pending_test-yellow)
-- Opt wallets into any ASA ![pending](https://img.shields.io/badge/pending_test-yellow)
-- Transfer tokens between wallets or to external addresses ![pending](https://img.shields.io/badge/pending_test-yellow)
-- View token details and holdings
+- Create your own Algorand Standard Asset with custom name, unit, supply, and decimals- Opt wallets into any ASA- Transfer tokens between wallets or to external addresses- View token details and holdings
 
 ### Smart Contract Interaction
-- Call any smart contract method with ABI encoding ![pending](https://img.shields.io/badge/pending_test-yellow)
-- Read global state from any app
+- Call any smart contract method with ABI encoding- Read global state from any app
 - Look up application escrow addresses
 - Pass custom arguments, foreign apps, assets, and accounts
 

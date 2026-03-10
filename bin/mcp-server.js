@@ -414,8 +414,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const p = info.params
         return ok({
           assetId: a.asset_id,
-          name: p['asset-name'] || p.name,
-          unit: p['unit-name'],
+          name: p.name || p['asset-name'],
+          unit: p.unitName || p['unit-name'],
           total: p.total,
           decimals: p.decimals,
           creator: p.creator,

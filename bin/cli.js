@@ -313,8 +313,8 @@ async function main() {
       const info = await getASAInfo(assetId)
       const p = info.params
       console.log(`\n  ASA ${assetId}`)
-      console.log(`  Name:     ${p['asset-name'] || p.name || '(unnamed)'}`)
-      console.log(`  Unit:     ${p['unit-name'] || p['unit-name'] || '?'}`)
+      console.log(`  Name:     ${p.name || p['asset-name'] || '(unnamed)'}`)
+      console.log(`  Unit:     ${p.unitName || p['unit-name'] || '?'}`)
       console.log(`  Total:    ${p.total}`)
       console.log(`  Decimals: ${p.decimals}`)
       console.log(`  Creator:  ${p.creator}`)
