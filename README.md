@@ -43,7 +43,7 @@ Works as a **CLI** and as a **Claude Code MCP server**, so Claude can manage Alg
 ## Install
 
 ```bash
-git clone https://github.com/mitchhall/algotool.git
+git clone https://github.com/mitchhall16/algotool.git
 cd algotool
 npm install
 ```
